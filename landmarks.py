@@ -28,6 +28,8 @@ while True:
             cv2.circle(frame, tuple(landmark), 3, (0, 255, 0), -1)
             cv2.putText(frame, f"{i}", tuple(landmark), cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.5, (0,255,0))
             i += 1
+        
+        cv2.putText(frame, f"{round(cap.get(cv2.CAP_PROP_POS_FRAMES))}", (50, 50), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 255))
     
     cv2.imshow("Eye Tracking", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
