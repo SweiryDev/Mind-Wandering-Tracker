@@ -18,7 +18,7 @@ def eye_aspect_ratio(eye_points):
     return ear
 
 # Start video capture (0 - Camera / 1 - Virtual Camera)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture("../AmitS.mkv")
 
 while True:
     ret, frame = cap.read()

@@ -1,16 +1,22 @@
 import cv2
 import dlib
 import numpy as np
+from typing import NamedTuple
 
 videoName = "../AmitS.mkv"
-i = 808 # Start Emoji
+i = 815 # Start Emoji
 
 selectiveArea = [1248, 19, 14, 19]
-cropRec = selectiveArea
+cropRec = []
 
-def main():
+
+class ReferenceFrame(NamedTuple):
+    roiRec: tuple[int, int, int, int]
+    refPixel: tuple[int, int, int]
+
+def main(i):
     # Declare global var
-    global i, cropRec
+    global cropRec
 
     while True:
         # Get video from file and set frame
@@ -41,28 +47,27 @@ def main():
 
         # Get key press and move frames 
         key = cv2.waitKey(0)
-        if key == 83: # Right arrow key
+        if key == 83 or key == ord('d'): # Right arrow / d key
             i += 1
-        elif key == 82: # Up arrow key
+        elif key == 82 or key == ord('w'): # Up arrow / w key
             i += 10
-        elif key == 84: # Down arrow key
+        elif key == 84 or key == ord('s'): # Down arrow / s key
             i -= 10
-        elif key == 81: # Left arrow key
+        elif key == 81 or key == ord('a') : # Left arrow / a key
             i -= 1
-        elif key == 49: # '1' key
+        elif key == 49 or key == ord('1'): # '1' key
             print(f"Chosen Average Pixel: {avg_pixel}")
+            cv2.destroyAllWindows()
+            return ReferenceFrame(cropRec, avg_pixel)
         else:
             cap.release()
+            cv2.destroyAllWindows()
             return
         
-
 def selectCrop(frame):
     roi = cv2.selectROI("SelectROI", frame, False)
     cv2.destroyWindow("SelectROI")
     return np.array(roi)
 
-if __name__ == "__main__":
-    main()
-    cv2.destroyAllWindows()    
 
-
+main(i)
