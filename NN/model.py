@@ -15,10 +15,11 @@ Y = np.load("../data/AmitS_distance.npy")
 middle_distance = np.max(Y) // 2
 roundOut = np.vectorize(lambda t: 1 if (t < middle_distance) else 0)
 Y = roundOut(Y)
-Y = np.concat((np.split(Y, [30])[1], np.zeros(30)))
+Y = np.concatenate((np.split(Y, [30])[1], np.zeros(30)))
 
-# Split the data
-x_train, x_val, y_train, y_val = train_test_split(X, Y, test_size=0.1, shuffle=False) 
+# Split the data (Don't shuffle! sequntial data should stay in order)
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, shuffle=False)
+x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.2, shuffle=False ) 
 
 # Define the model (layers test!)
 model = tf.keras.Sequential([
@@ -33,4 +34,4 @@ model = tf.keras.Sequential([
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 
-history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=1, batch_size=32)
+history = model.fit(x_train, y_train, validation_data=(x_test, y_test), epochs=3, batch_size=32)
