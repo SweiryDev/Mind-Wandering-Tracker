@@ -11,10 +11,10 @@ startFrameRef = 815
 
 
 def main():
-    global ref
+    global ref, startFrameRef
     
     # Get the reference rectangle of the frame and reference pixel (detect self-report)
-    ref = crop.main(startFrameRef)
+    ref = crop.main(startFrameRef, videoName)
     if not ref: raise Exception("No reference frame and average pixel!")
 
     # Load face detector and predictor

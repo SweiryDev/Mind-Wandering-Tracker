@@ -14,7 +14,7 @@ class ReferenceFrame(NamedTuple):
     roiRec: tuple[int, int, int, int]
     refPixel: tuple[int, int, int]
 
-def main(i):
+def main(i, videoName):
     # Declare global var
     global cropRec
 
@@ -68,6 +68,3 @@ def selectCrop(frame):
     roi = cv2.selectROI("SelectROI", frame, False)
     cv2.destroyWindow("SelectROI")
     return np.array(roi)
-
-
-main(i)
