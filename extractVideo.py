@@ -3,11 +3,13 @@ import dlib
 import numpy as np
 import crop
 
-videoName = "../AmitS.mkv"
+participant = "RoyL"
+
+videoName = f"../{participant}.mkv"
 lastFrame = 0
 
 # Offset frame to start the manual frame selection (refrence roi and average pixel)
-startFrameRef = 815
+startFrameRef = 960
 
 
 def main():
@@ -31,6 +33,7 @@ def main():
     # Get the number of frames in the video
     videoFrames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     print(f"Number Of Frames In The Video: {videoFrames}")
+    print(f"Participant: {participant}")
 
     # Initialize the landmark array (array of landmark matrices)
     landmarks_tensor = []
@@ -70,13 +73,13 @@ def main():
         
     # Save landmarks tensor to file
     landmarks_tensor = np.array(landmarks_tensor, dtype=int)
-    np.save("data/landmark.npy", landmarks_tensor)
-    print(f"Landmark Tensor Shape: {landmarks_tensor.shape}, Saved to data/landmark.npy")
+    np.save(f"data/{participant}_landmark.npy", landmarks_tensor)
+    print(f"Landmark Tensor Shape: {landmarks_tensor.shape}, Saved to data/{participant}landmark.npy")
     
     # Save pixel distance array to file
     pixel_distance_arr = np.array(pixel_distance_arr, dtype=int)
-    np.save("data/distance.npy", pixel_distance_arr)
-    print(f"Pixel Distance Shape: {pixel_distance_arr.shape}, Saved to data/distance.npy")
+    np.save(f"data/{participant}_distance.npy", pixel_distance_arr)
+    print(f"Pixel Distance Shape: {pixel_distance_arr.shape}, Saved to data/{participant}_distance.npy")
 
     # Release the video file
     cap.release()

@@ -6,7 +6,7 @@ import numpy as np
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")  # Download this file
 
-videoName = "../AmitS.mkv"
+videoName = "../AmitA.mkv"
 cap = cv2.VideoCapture(videoName)
 cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
 
@@ -31,7 +31,7 @@ while True:
         
         cv2.putText(frame, f"{round(cap.get(cv2.CAP_PROP_POS_FRAMES))}", (50, 50), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 255))
     
-    cv2.imshow("Eye Tracking", frame)
+    cv2.imshow("Display Landmarks", frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
