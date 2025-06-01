@@ -3,13 +3,13 @@ import dlib
 import numpy as np
 import crop
 
-participant = "ArielK"
+participant = "AviC"
 
 videoName = f"../{participant}.mkv"
 lastFrame = 0
 
 # Offset frame to start the manual frame selection (refrence roi and average pixel)
-startFrameRef = 1290
+startFrameRef = 22055
 
 
 def main():
@@ -74,7 +74,7 @@ def main():
     # Save landmarks tensor to file
     landmarks_tensor = np.array(landmarks_tensor, dtype=int)
     np.save(f"data/{participant}_landmark.npy", landmarks_tensor)
-    print(f"Landmark Tensor Shape: {landmarks_tensor.shape}, Saved to data/{participant}landmark.npy")
+    print(f"Landmark Tensor Shape: {landmarks_tensor.shape}, Saved to data/{participant}_landmark.npy")
     
     # Save pixel distance array to file
     pixel_distance_arr = np.array(pixel_distance_arr, dtype=int)

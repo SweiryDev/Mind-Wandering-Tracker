@@ -12,7 +12,7 @@ Y = np.load("../data/AmitS_distance.npy")
 # X = X.reshape((X.shape[0], -1))
 
 # Round output data to binary
-middle_distance = np.max(Y) // 2
+middle_distance = np.mean(Y) // 2
 roundOut = np.vectorize(lambda t: 1 if (t < middle_distance) else 0)
 Y = roundOut(Y)
 Y = np.concatenate((np.split(Y, [30])[1], np.zeros(30)))

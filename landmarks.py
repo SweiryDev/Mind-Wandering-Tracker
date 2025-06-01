@@ -6,7 +6,7 @@ import numpy as np
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")  # Download this file
 
-videoName = "../AmitA.mkv"
+videoName = "../AviC.mkv"
 cap = cv2.VideoCapture(videoName)
 cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
 
@@ -22,7 +22,7 @@ while True:
         # Get facial landmarks
         landmarks = predictor(gray, face)
         landmarks_points = np.array([[p.x, p.y] for p in landmarks.parts()])
-        i = 0
+        i = 1
 
         for landmark in landmarks_points:
             cv2.circle(frame, tuple(landmark), 3, (0, 255, 0), -1)
