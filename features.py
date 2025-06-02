@@ -29,8 +29,8 @@ def convert_landmark_points_to_features(points):
     (nxp, nyp) = nose_center
     
     # -- OMAR -- 
-    outter_mouth_points = points[48:60] # P49 - P60        
-    omar = outter_mouth_aspect_ratio(outter_mouth_points)
+    outer_mouth_points = points[48:60] # P49 - P60        
+    omar = outer_mouth_aspect_ratio(outer_mouth_points)
     
     # -- FP --
     face_points = points # P1 - P68
@@ -84,9 +84,9 @@ def inner_mouth_aspect_ratio(mouth_points):
         mouth_opening_ratio = vertical_avg / horizontal
         return round(mouth_opening_ratio,2)
 
-# Function to get outter mouth aspect ratio (OMAR) P49 to P60
-def outter_mouth_aspect_ratio(mouth_points):
-    # vertical distances of outter mouth
+# Function to get outer mouth aspect ratio (OMAR) P49 to P60
+def outer_mouth_aspect_ratio(mouth_points):
+    # vertical distances of outer mouth
     v1 = np.linalg.norm(mouth_points[1] - mouth_points[11])  # P50 - P60
     v2 = np.linalg.norm(mouth_points[2] - mouth_points[10])  # P51 - P59
     v3 = np.linalg.norm(mouth_points[3] - mouth_points[9])  # P52 - P58
@@ -96,7 +96,7 @@ def outter_mouth_aspect_ratio(mouth_points):
     # average vertical distance
     vertical_avg = (v1 + v2 + v3 + v4 + v5) / 5.0
     
-    # horizontal distance of outter mouth
+    # horizontal distance of outer mouth
     horizontal = np.linalg.norm(mouth_points[0] - mouth_points[6]) # P49 - P55
     
     omar = vertical_avg / horizontal
@@ -271,10 +271,10 @@ def main():
             cv2.putText(frame, f"NYP: {nyp}", (10,150),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (128,0,0), 2)
             
-            # -- OMAR -- outter mouth aspect ratio
-            outter_mouth_points = landmarks_points[48:60] # P49 - P60
+            # -- OMAR -- outer mouth aspect ratio
+            outer_mouth_points = landmarks_points[48:60] # P49 - P60
             
-            omar = outter_mouth_aspect_ratio(outter_mouth_points)
+            omar = outer_mouth_aspect_ratio(outer_mouth_points)
             
             # Show OMAR on screen
             cv2.putText(frame, f"OMAR: {omar}", (10, 170),
