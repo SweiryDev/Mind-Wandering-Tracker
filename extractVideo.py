@@ -3,13 +3,13 @@ import dlib
 import numpy as np
 import crop
 
-participant = "AviC"
+participant = "LizaM"
 
 videoName = f"../{participant}.mkv"
 lastFrame = 0
 
 # Offset frame to start the manual frame selection (refrence roi and average pixel)
-startFrameRef = 22055
+startFrameRef = 864
 
 
 def main():
