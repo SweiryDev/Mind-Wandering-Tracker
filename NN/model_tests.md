@@ -135,3 +135,64 @@ Found at threshold: 0.35
 weighted avg       0.82      0.74      0.76     96352
 ```
 ---
+#### T8 - Probably overfit
+
+sequence_length = 90
+max_layer_neurons = 1024
+epochs=4, batch_size=64
+
+```
+Best F1-Score for Class 1: 0.4224
+Found at threshold: 0.30
+
+\n==== Classification Report with Optimal Threshold ====\n
+              precision    recall  f1-score   support
+
+         0.0       0.87      0.36      0.51     73637
+         1.0       0.28      0.82      0.42     22715
+
+    accuracy                           0.47     96352
+   macro avg       0.58      0.59      0.47     96352
+weighted avg       0.73      0.47      0.49     96352
+```
+---
+#### T9 - too complex and overfit
+
+sequence_length = 90
+max_layer_neurons = 1024
+epochs=2, batch_size=64
+
+```
+Best F1-Score for Class 1: 0.3319
+Found at threshold: 0.05
+
+\n==== Classification Report with Optimal Threshold ====\n
+              precision    recall  f1-score   support
+
+         0.0       0.80      0.13      0.23     34466
+         1.0       0.20      0.87      0.33      8844
+
+    accuracy                           0.28     43310
+   macro avg       0.50      0.50      0.28     43310
+weighted avg       0.68      0.28      0.25     43310
+```
+---
+#### T10
+sequence_length = 30
+max_layer_neurons = 512
+epochs=2, batch_size=64
+
+This test reduced the model's complexity by decreasing the number of neurons to 512 while keeping the sequence length at 30. It utilized class_weight and optimal threshold tuning.
+
+Best F1-Score for Class 1: 0.3145
+Found at threshold: 0.05
+
+\n==== Classification Report with Optimal Threshold ====\n
+              precision    recall  f1-score   support
+
+         0.0       0.81      0.42      0.56     34526
+         1.0       0.21      0.61      0.31      8844
+
+    accuracy                           0.46     43370
+   macro avg       0.51      0.51      0.43     43370
+weighted avg       0.69      0.46      0.51     43370
