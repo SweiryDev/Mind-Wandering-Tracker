@@ -15,7 +15,7 @@ Clone this repo using git
 - VSCode (tested) or another Jupyter enviorment (for python notebook)
 - Python 3.10 (tested on 3.10.9)
 - CMake
-- pip modules: numpy, opencv-python, dlib, matplotlib, ipykernal, tensorflow, scikit-learn
+- pip modules: numpy, opencv-python, dlib, matplotlib, ipykernal, tensorflow, scikit-learn, pandas
 
 check the Tensorflow docs for the optimal installation for your OS and GPU, using WSL for GPU acceleration is recommended.
 for WSL and linux use pyenv.
@@ -43,7 +43,7 @@ videoName = 0 # for webcam live usage
 videoName = "path_to_video" # to load and play video file
 ``` 
 
-3. Extract the 68 landmark points and the self-report signal using the extractVideo.py script.
+3. Extract the 68 landmark points and the self-report signal using the extract_video.py script.
 Change the Name variable in the script for the output file name to contain the participant name, change the StartFrameRef variable to the frame when the emoji appear in the experiment video.
 Once you run it you have to select the region of interest (ROI) where the emoji fully appear (press enter to confirm), the next window is the reference frame selection window (press 'd'/'a' to move 1 frame forward/backward and the key '1' to confirm or 'c' to exit).
 The script will output 2 data files into the data folder.

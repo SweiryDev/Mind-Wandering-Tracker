@@ -6,7 +6,7 @@ import numpy as np
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")  # Download this file
 
-videoName = "../AviC.mkv"
+videoName = "../AmitS.mkv"
 cap = cv2.VideoCapture(videoName)
 cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
 

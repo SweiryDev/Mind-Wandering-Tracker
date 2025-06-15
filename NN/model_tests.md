@@ -196,3 +196,163 @@ Found at threshold: 0.05
     accuracy                           0.46     43370
    macro avg       0.51      0.51      0.43     43370
 weighted avg       0.69      0.46      0.51     43370
+---
+#### T11 - Could be good...
+sequence_length = 90
+max_layer_neurons = 1024
+epochs=2, batch_size=64
+recurrent_dropout=0.5, dropout=[0.4, 0.3, 0.2]
+
+This test used the best performing architecture (T7) and increased dropout rates to combat overfitting [cite: model_book.ipynb].
+
+Best F1-Score for Class 1: 0.3145
+Found at threshold: 0.05
+
+\n==== Classification Report with Optimal Threshold ====\n
+              precision    recall  f1-score   support
+
+         0.0       0.81      0.42      0.56     34526
+         1.0       0.21      0.61      0.31      8844
+
+    accuracy                           0.46     43370
+   macro avg       0.51      0.51      0.43     43370
+weighted avg       0.69      0.46      0.51     43370
+
+---
+#### T12
+sequence_length = 90
+max_layer_neurons = 128
+epochs=2, batch_size=512
+Architecture: Bidirectional LSTM
+
+This test introduced a Bidirectional LSTM layer to see if providing both forward and backward context could improve performance. It used a lower neuron count (128) to manage complexity [cite: model_book.ipynb].
+
+Best F1-Score for Class 1: 0.3021
+Found at threshold: 0.20
+
+\n==== Classification Report with Optimal Threshold ====\n
+              precision    recall  f1-score   support
+
+         0.0       0.91      0.50      0.65     77563
+         1.0       0.19      0.69      0.30     13300
+
+    accuracy                           0.53     90863
+   macro avg       0.55      0.60      0.47     90863
+weighted avg       0.80      0.53      0.60     90863
+---
+#### T13
+sequence_length = 90
+max_layer_neurons = 512
+epochs=2, batch_size=512
+Architecture: Bidirectional LSTM
+
+This test used a more powerful Bidirectional LSTM with 512 neurons to see if it could improve precision over the simpler 128-neuron version [cite: model_book.ipynb].
+
+Best F1-Score for Unfiltered Signal (Class 1): 0.3199
+Found at threshold: 0.20
+
+==== Classification Report with F1-Optimized Threshold (Unfiltered) ====
+
+              precision    recall  f1-score   support
+
+         0.0       0.93      0.46      0.62     77563
+         1.0       0.20      0.79      0.32     13300
+
+    accuracy                           0.51     90863
+   macro avg       0.56      0.62      0.47     90863
+weighted avg       0.82      0.51      0.57     90863
+---
+#### T14
+sequence_length = 90
+epochs = 2, batch_size = 512
+Architecture: Stacked LSTM (256 -> 128 neurons)
+
+This test implemented a deeper, stacked LSTM architecture to see if hierarchical feature learning could improve precision.
+
+Best F1-Score for Unfiltered Signal (Class 1): 0.3062
+Found at threshold: 0.80
+
+==== Classification Report with F1-Optimized Threshold (Unfiltered) ====
+
+              precision    recall  f1-score   support
+
+         0.0       0.89      0.64      0.75     77563
+         1.0       0.20      0.56      0.31     13300
+
+    accuracy                           0.63     90863
+   macro avg       0.55      0.60      0.53     90863
+weighted avg       0.79      0.63      0.68     90863
+---
+#### T15
+sequence_length = 30
+max_layer_neurons = 512
+epochs=20 (with Early Stopping)
+batch_size=16
+Architecture: LSTM with L2 Regularization and Batch Normalization
+
+This was a comprehensive test combining multiple advanced regularization techniques (L2, Batch Norm, Dropout) and training callbacks on a simpler architecture.
+
+Best F1-Score for Unfiltered Signal (Class 1): 0.2905
+Found at threshold: 0.30
+
+==== Classification Report with F1-Optimized Threshold (Unfiltered) ====
+
+              precision    recall  f1-score   support
+
+         0.0       0.88      0.77      0.82     77623
+         1.0       0.23      0.41      0.29     13300
+
+    accuracy                           0.71     90923
+   macro avg       0.56      0.59      0.56     90923
+weighted avg       0.79      0.71      0.74     90923
+---
+####T16
+sequence_length = 30
+max_layer_neurons = 512
+epochs=20 (with Early Stopping)
+batch_size=16
+Architecture: LSTM with L2 on both Kernel/Recurrent weights and Batch Normalization.
+
+This test used a shorter sequence length but applied a comprehensive suite of regularization techniques to stabilize the training of a moderately sized LSTM.
+
+Best F1-Score for Unfiltered Signal (Class 1): 0.2977
+Found at threshold: 0.40
+
+==== Classification Report with F1-Optimized Threshold (Unfiltered) ====
+
+              precision    recall  f1-score   support
+
+         0.0       0.86      0.82      0.84     77623
+         1.0       0.20      0.26      0.23     13300
+
+    accuracy                           0.74     90923
+   macro avg       0.53      0.54      0.53     90923
+weighted avg       0.76      0.74      0.75     90923
+---
+#### Final Model Report: Test 17
+Configuration
+sequence_length: 90
+max_layer_neurons: 1024
+epochs: 20 (Training was stopped at 7 epochs by the EarlyStopping callback)
+batch_size: 400
+Architecture:
+A single, unidirectional LSTM layer with L2 regularization on both kernel and recurrent weights.
+Batch Normalization was applied after the LSTM and Dense layers to improve stability.
+Training Method:
+EarlyStopping and ReduceLROnPlateau callbacks were used to control overfitting and manage the learning rate.
+Performance Results
+The model was evaluated by first finding the optimal prediction threshold that maximized the F1-score for the mind-wandering class (1.0).
+
+Best F1-Score for Unfiltered Signal (Class 1): 0.1831
+Found at threshold: 0.95
+
+==== Classification Report with F1-Optimized Threshold (Unfiltered) ====
+
+              precision    recall  f1-score   support
+
+         0.0       0.86      0.84      0.85     65629
+         1.0       0.17      0.20      0.18     10435
+
+    accuracy                           0.75     76064
+   macro avg       0.52      0.52      0.52     76064
+weighted avg       0.76      0.75      0.76     76064
