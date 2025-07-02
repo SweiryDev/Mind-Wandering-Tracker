@@ -17,8 +17,8 @@ Clone this repo using git
 - CMake
 - pip modules: numpy, opencv-python, dlib, matplotlib, ipykernal, tensorflow, scikit-learn, pandas
 
-check the Tensorflow docs for the optimal installation for your OS and GPU, using WSL for GPU acceleration is recommended.
-for WSL and linux use pyenv.
+Check the Tensorflow docs for the optimal installation for your OS and GPU, using WSL for GPU acceleration in Windows is recommended.
+For WSL and linux use pyenv to manage Python versions.
 
 this repo is required with data folder including read/write access.
 
@@ -54,5 +54,8 @@ Go over the code blocks to validate the data and confirm the number of self-repo
 
 5. Transform the valid landmark points data and self-report distance signal using the transform_data.py script, the main function in the script process the data into the input.npy and output.npy files (of shape (n, 14) and (n,) respectively) and saves it to data/process folder.
 
+6. Using the input and output data pair generated from the last step train and test the model with the chosen architecture and parameters for the model. model_train.ipynb and model_benchmark.ipynb are Python notebook that contain the scripts and modules needed for this goal.
 
-Training and testing neural network coming soon...
+7. Fine-tune the model using the predictions against the self-reported data.
+
+Some tested models info are stored in the model_tests.md file in the NN folder and contain basic metrics scores and architecture configurations for each model.

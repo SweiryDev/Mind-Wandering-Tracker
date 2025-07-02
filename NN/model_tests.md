@@ -1,4 +1,4 @@
-Tests:
+# Tests
 
 ---
 #### T1
@@ -356,3 +356,46 @@ Found at threshold: 0.95
     accuracy                           0.75     76064
    macro avg       0.52      0.52      0.52     76064
 weighted avg       0.76      0.75      0.76     76064
+
+
+# Features Tests
+
+sequence_length = 90
+max_layer_neurons = 1024
+
+#### > .2 positive f1 classification features set 
+features [1,2,3,4,10,11,12] - EAR, EEAR, FRR, MNAR
+
+Classification Report:
+               precision    recall  f1-score   support
+
+         0.0       0.87      0.89      0.88     41536
+         1.0       0.33      0.30      0.31      7651
+
+    accuracy                           0.80     49187
+   macro avg       0.60      0.59      0.60     49187
+weighted avg       0.79      0.80      0.79     49187
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+#### > .6 accuracy score features set
+features [0,7,8,9,10,11,12,13] - IMAR, OMAR, FP, FRR, MNAR, MCAR
+
+Classification Report:
+               precision    recall  f1-score   support
+
+         0.0       0.87      0.74      0.80     41536
+         1.0       0.21      0.38      0.27      7651
+
+    accuracy                           0.69     49187
+   macro avg       0.54      0.56      0.54     49187
+weighted avg       0.76      0.69      0.72     49187
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+
+
